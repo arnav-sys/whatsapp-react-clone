@@ -1,23 +1,35 @@
-# Getting Started with Create React App
+# Whatsapp clone with react
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The technologies used in this project are material ui, firebase and react
 
-## Available Scripts
+## hiereachy view of the app
 
-In the project directory, you can run:
+The project is created with mainly 3 components.
 
-### `npm start`
+the first one is sidebar component where all the channel list and other material ui icons are rendered.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+the second one is chat component where the ui of the chat and logic for it is stored
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+the third one is login component where the ui of login screen and logic for firebase google authentication is stored
 
-### `npm test`
+the sidebar component also renders a child component sidebarchannel where it shows the list of channels
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+###firebase
+
+the firebase will be used a lot in the app. There is a firebase.js file in our application where all the firebase config is stored. Apart from that there are 4 more constants. The first one is firebaseApp which is your firebase app itself. the second one is provider which is the google auth provider and it will be used for login functionality. Then there is firebase auth which provides backend services for authentication. The last one is db which is the firebase firestore
+
+#react context api
+
+the react context api is used for our state management. It is created in stateprovider.js file. Statecontext constant is our context created by createContext method. the stateprovider const just acts like a datalayer which ahd three props reducer(which sees for changes) initialState(our currentState) and children. It is called in index.js file and app component is passed in as a child. The initialState, reducer are imported from reducer.js file. In reducer.js file the initialState is set to user which is null.
+
+### `authentication  logic`
+
+the logic for authentication is in the login.js file. It has a sign in function in which we calls auth from firebase.js file and puts the .signInWithPopup(provider) (provider is from firebase) function which signs in the user with the help of firebase and then sets the action type to set user and user state to the current user provided from firebase(the action state and user state are from redux).
+
+### `messaging functionality`
+
+when we are logged in a list of groups are rendered in our sidebar file. These lists comes from our firebase store. A useeffect hook is called which takes all the room documents from firebase and store them in our own peice of state called rooms. Then we map through the state and render each of them. In chat.js all our complex messaging functionality is stored
+
 
 ### `npm run build`
 
